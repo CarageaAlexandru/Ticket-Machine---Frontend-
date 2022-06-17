@@ -18,14 +18,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Ticket {
     
-
     private String fromStationName;
     private String toStationName;
     private String fromZone,toZone;
     private boolean hasEntered, hasExited;
     private Date toDate, fromDate;
 
-    public Ticket(String fromStationName, String toStationName, String fromZone, String toZone, boolean hasEntered, boolean hasExited, Date toDate, Date fromDate) {
+    public Ticket(String fromStationName, String toStationName,
+            String fromZone, String toZone,
+            boolean hasEntered, boolean hasExited,
+            Date toDate, Date fromDate) {
+        
         this.fromStationName = fromStationName;
         this.toStationName = toStationName;
         this.fromZone = fromZone;
@@ -101,6 +104,10 @@ public class Ticket {
 
     public void setFromDate(Date fromDate) {
         this.fromDate = fromDate;
+    }
+
+    public String generateTicket(Ticket myTicket) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
   

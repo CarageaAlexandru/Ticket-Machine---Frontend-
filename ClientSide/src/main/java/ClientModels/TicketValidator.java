@@ -14,6 +14,11 @@ public class TicketValidator {
     
     private boolean isValid;
     private String XML;
+    
+    public TicketValidator(boolean isValid, String XML) {
+        this.isValid = isValid;
+        this.XML = XML;
+    }
 
     public TicketValidator() {
     }
@@ -33,7 +38,4 @@ public class TicketValidator {
     public void setXML(String XML) {
         this.XML = XML;
     }
-    
-    
-    
 }

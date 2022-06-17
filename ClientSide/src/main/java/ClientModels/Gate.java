@@ -9,6 +9,7 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.Date;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
@@ -20,12 +21,13 @@ public class Gate {
 
     private int zone;
 
+    
 //    Method for enter 
     public TicketValidator enter(String xml) {
 //        JAXB code to Unmarshall
 
         JAXBContext context;
-
+        
         TicketValidator validateTicket = new TicketValidator();
 
         try {
@@ -48,12 +50,12 @@ public class Gate {
                 validateTicket.setXML(re_marshalledXml);
                 return validateTicket;
 
-            } catch (Exception e) {
-                System.out.println(e);
+            } catch (JAXBException error) {
+                System.out.println(error);
             }
 
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (JAXBException error) {
+            System.out.println(error);
         }
         return null;
 
@@ -66,25 +68,24 @@ public class Gate {
 
         JAXBContext context;
 
-        TicketValidator validateTicket = new TicketValidator();
-
         try {
             context = JAXBContext.newInstance(Ticket.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
             StringReader reader = new StringReader(xml);
             Ticket ticket = (Ticket) unmarshaller.unmarshal(reader);
 
-            if (ticket.isHasExited() == false && new Date().before(ticket.getToDate()) && Integer.parseInt(ticket.getToZone()) == zone) {
+            if (ticket.isHasExited() == false &&
+                    new Date().before(ticket.getToDate()) &&
+                    Integer.parseInt(ticket.getToZone()) == zone) {
                 ticket.setHasExited(true);
                 return true;
             }
 
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (Exception error) {
+            System.out.println(error);
         }
         return false;
 
-//        
     }
 
     public int getZone() {

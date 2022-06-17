@@ -18,7 +18,7 @@ import javax.xml.bind.Marshaller;
 public class TicketGenerator {
     public static String generateTicket(Ticket ticket) {
         
-        String ex;
+        String test;
         try {
             JAXBContext context = JAXBContext.newInstance(Ticket.class);
             Marshaller marshall = context.createMarshaller();
@@ -31,10 +31,10 @@ public class TicketGenerator {
             
         } catch (JAXBException error) {
             System.out.println(error);
-            ex = error.toString();
+            test = error.toString();
         }
         
-        return ex;
+        return test;
     }
     
 }

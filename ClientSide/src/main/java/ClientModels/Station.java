@@ -20,8 +20,6 @@ public class Station {
     private int zone;
     Gate gates = new Gate(zone);
 
-
-
 //    we need the default constructor for Marshalling and UnMarshalling
 
     public Station() {
@@ -32,8 +30,6 @@ public class Station {
         this.stationid = stationid;
         this.zone = zone;
     }
-    
-    
 
     public String getStationname() {
         return stationname;
@@ -58,8 +54,6 @@ public class Station {
     public void setZone(int zone) {
         this.zone = zone;
     }
-  
-    
-    
+   
     
 }

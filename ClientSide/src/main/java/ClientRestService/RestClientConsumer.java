@@ -52,10 +52,10 @@ public class RestClientConsumer {
     
     public static void main(String[] aregs)
     {
-        List<Station> st = getStations();
-        for(int i=0;i<st.size();i++)
+        List<Station> stations = getStations();
+        for(int i=0;i<stations.size();i++)
         {
-            System.out.println(st.get(i).getStationname());
+            System.out.println(stations.get(i).getStationname());
         }
                 
     }

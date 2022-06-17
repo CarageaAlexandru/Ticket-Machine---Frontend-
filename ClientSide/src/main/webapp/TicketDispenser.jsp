@@ -72,10 +72,10 @@
                 
                 
                 
-                out.print("<h1>" + request.getParameter("fromStation") + "</h1>");
-                out.print("<h1>" + request.getParameter("toStation") + "</h1>");
-                out.print("<h1>" + request.getParameter("dateTo") + "</h1>");
-                
+//                out.print("<h1>" + request.getParameter("fromStation") + "</h1>");
+//                out.print("<h1>" + request.getParameter("toStation") + "</h1>");
+//                out.print("<h1>" + request.getParameter("dateTo") + "</h1>");
+//                
                 Ticket generatedTicket = new Ticket(stationListFrom.get(fromZone).getStationname(),
                                                     stationListTo.get(toZone).getStationname(),
                                                     String.valueOf(stationListFrom.get(fromZone).getZone()),

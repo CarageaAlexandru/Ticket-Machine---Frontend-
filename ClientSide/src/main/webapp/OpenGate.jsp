@@ -4,6 +4,7 @@
     Author     : caragea
 --%>
 
+<%@page import="ClientModels.Station"%>
 <%@page import="ClientModels.TicketValidator"%>
 <%@page import="java.io.StringReader"%>
 <%@page import="javax.xml.bind.Unmarshaller"%>
@@ -29,7 +30,7 @@
     Date currentTime = new Date();
     System.out.println(formatter.format(currentTime));
 
-    out.print("<h1>" + formatter.format(currentTime) + "</h1>");
+//    out.print("<h1>" + formatter.format(currentTime) + "</h1>");
 
     String ticktToUnmarshall = request.getParameter("ticktToUnmarshall");
 
@@ -40,7 +41,7 @@
 
     boolean openGate = false;
 
-    out.print("<h1>" + ticktToUnmarshall + "</h1>");
+//    out.print("<h1>" + ticktToUnmarshall + "</h1>");
 
 
 %>
@@ -79,28 +80,38 @@
         <%
             String ticketUnmarshall = null;
             Gate new_gate = null;
-            TicketValidator validator = new TicketValidator();
+            Station station = new Station();
+            //TicketValidator validator = new TicketValidator();
 
-            if (request.getParameter("ticketString") != null) {
-                ticketUnmarshall = request.getParameter("ticketString");
+            if (request.getParameter("ticktToUnmarshall") != null) {
+                ticketUnmarshall = request.getParameter("ticktToUnmarshall");
 
                 JAXBContext context = JAXBContext.newInstance(Ticket.class);
                 Unmarshaller unmarshaller = context.createUnmarshaller();
                 StringReader reader = new StringReader(ticketUnmarshall);
                 Ticket ticketUnmarshalled = (Ticket) unmarshaller.unmarshal(reader);
-                new_gate.enter(ticketUnmarshall);
+                    
+
                 out.print(ticketUnmarshalled.getToStationName());
-
-                    out.print("<h1>" + Integer.parseInt(ticketUnmarshalled.getToZone()) + "</h1>");
-
+                new_gate = new Gate(Integer.parseInt(ticketUnmarshalled.getFromZone()));
+                
+//                get the station name, station id and zone
+                //String stationName = ticketUnmarshalled.getFromStationName();
+                TicketValidator validation = new_gate.enter(ticketUnmarshall);
+                
+                if (validation.isIsValid()) {
+                    openGate = true;
+                }
             }
+
+            
 
         %>
         <br>
         <% if (openGate) { %>
-        <div style="color:green;">Gate Opened</div>
+        <div style="color:green;">Gate has been opened</div>
         <%  } else {  %>
-        <div style="color:red;">Gate Locked</div>
+        <div style="color:red;">Gate is locked</div>
         <% }%>
 
 
